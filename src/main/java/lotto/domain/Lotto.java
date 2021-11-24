@@ -1,16 +1,30 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.List;
+import lotto.util.RandomUtil;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
 
-    public static final int LOTTO_NUMBER_COUNT = 6;
+    public static final int NUMBER_COUNT = 6;
+
+
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto() {
-        this(LottoNumber.getRandomNumber(LOTTO_NUMBER_COUNT));
+        this(pickRandomNumber(NUMBER_COUNT));
+    }
+
+    private static List<LottoNumber> pickRandomNumber(int numberCount) {
+        Set<LottoNumber> tmpLottoNumbers = new HashSet<>();
+        while (tmpLottoNumbers.size() < numberCount) {
+            tmpLottoNumbers.add(new LottoNumber(RandomUtil.randomInt(LottoNumber.MAX_VALUE)));
+        }
+
+        List<LottoNumber> lottoNumbers = new ArrayList<>(tmpLottoNumbers);
+        Collections.sort(lottoNumbers);
+        return lottoNumbers;
     }
 
     public Lotto(final String numbers) {
@@ -22,7 +36,7 @@ public class Lotto {
     }
 
     public Lotto(final List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
+        if (lottoNumbers.size() != NUMBER_COUNT) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
         this.lottoNumbers = lottoNumbers;

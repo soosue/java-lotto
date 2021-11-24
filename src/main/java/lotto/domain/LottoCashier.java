@@ -7,17 +7,9 @@ public class LottoCashier {
 
     private static final int MIN_LOTTO_BUY_PRICE = 1000;
 
-    public List<Lotto> pay(int money) {
+    public int calculateCountAvailable(int money) {
         validate(money);
-
-        int lottoCount = calculateCountAvailable(money);
-
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < lottoCount; i++) {
-            lottos.add(new Lotto());
-        }
-
-        return lottos;
+        return money / LottoShop.LOTTO_PRICE;
     }
 
     private void validate(int money) {
@@ -26,8 +18,15 @@ public class LottoCashier {
         }
     }
 
-    private int calculateCountAvailable(int money) {
-        return money / LottoShop.LOTTO_PRICE;
+    public List<Lotto> pay(int money) {
+        int lottoCount = calculateCountAvailable(money);
+
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < lottoCount; i++) {
+            lottos.add(new Lotto());
+        }
+
+        return lottos;
     }
 
 }

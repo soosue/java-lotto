@@ -6,12 +6,12 @@ import java.util.List;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
+    private static final int MIN_VALUE = 1;
+    public static final int MAX_VALUE = 45;
 
     private static final List<LottoNumber> lottoNumbers = new ArrayList<>();
     static {
-        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
+        for (int i = MIN_VALUE; i <= MAX_VALUE; i++) {
             lottoNumbers.add(new LottoNumber(i));
         }
     }
@@ -24,7 +24,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private void validate(int value) {
-        if (value < MIN_LOTTO_NUMBER || value > MAX_LOTTO_NUMBER) {
+        if (value < MIN_VALUE || value > MAX_VALUE) {
             throw new IllegalArgumentException("해당 번호의 로또번호는 없습니다.");
         }
     }
